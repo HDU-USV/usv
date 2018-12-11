@@ -7,4 +7,4 @@
   
 ![](https://github.com/hduusv512/xiaozhu/blob/master/image-folder/peiqi.jpg)
 
-# <center>加油！让我们全力以赴！！！</center>
+# 加油！让我们全力以赴！！！！！
