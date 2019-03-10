@@ -8,7 +8,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "JY901.h"
-
+//#include "mavlink.h"
 
 struct STime		stcTime;
 struct SAcc 		stcAcc;
@@ -185,7 +185,7 @@ int main(void)
 	uart_init(115200);	//串口初始化波特率为115200
 	uart2_init(9600);
 	delay_ms(1000);//等等JY-91初始化完成
-	acc_calibration();
+	//acc_calibration();
 
 	while(1)
 	{

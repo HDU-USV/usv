@@ -1,0 +1,68 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.26.2.0
+Copyright (C) 2018 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 11111111 HP Inc., HP Inc., LIC=7YK12-9L4E9-RF7IZ-JCUMN-JECBQ-DWH0B
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.26.2.0
+Toolchain Path:  e:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 6 (build 750)
+Assembler:       Armasm.exe V5.06 update 6 (build 750)
+Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
+Library Manager: ArmAr.exe V5.06 update 6 (build 750)
+Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
+CPU DLL:         SARMCM3.DLL V5.26.2.0
+Dialog DLL:      DCM.DLL V1.17.2.0
+Target DLL:      Segger\JL2CM3.dll V2.99.31.0
+Dialog DLL:      TCM.DLL V1.36.1.0
+ 
+<h2>Project:</h2>
+D:\USV\software_develop\usv\stm32_mavlink\USER\USART.uvprojx
+Project File Date:  03/08/2019
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'e:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'USART'
+compiling main.c...
+..\HARDWARE\COM\communicate.h(14): warning:  #1295-D: Deprecated declaration send_to_server - give arg types
+  void send_to_server();
+main.c(25): warning:  #177-D: variable "buff"  was declared but never referenced
+  	unsigned char buff[6];
+main.c(26): warning:  #177-D: variable "packet"  was declared but never referenced
+    unsigned char packet[28];
+main.c(27): warning:  #177-D: variable "checksum"  was declared but never referenced
+    uint16_t checksum;
+main.c(28): warning:  #177-D: variable "ck"  was declared but never referenced
+    uint8_t ck[2];
+main.c(29): warning:  #177-D: variable "t"  was declared but never referenced
+  	u8 t;
+main.c(30): warning:  #177-D: variable "len"  was declared but never referenced
+  	u8 len;	
+main.c(31): warning:  #177-D: variable "times"  was declared but never referenced
+  	u16 times=0;  
+main.c: 8 warnings, 0 errors
+linking...
+Program Size: Code=2292 RO-data=424 RW-data=28 ZI-data=1836  
+FromELF: creating hex file...
+"..\OBJ\USART.axf" - 0 Error(s), 8 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.13.0.pack
+                Keil.STM32F4xx_DFP.2.13.0
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_USART
+  e:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+
+<h2>Collection of Component Files used:</h2>
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
