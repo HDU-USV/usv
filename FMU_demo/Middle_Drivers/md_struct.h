@@ -46,6 +46,16 @@ typedef struct{
 	int16_t temp;   //temperature
 }MPU6000_Data;
 
+/* 传感器数据处理和姿态解算结构体 */
+typedef struct{
+	Vector3_Float accf;
+	Vector3_Float gyrof;
+	Vector3_Float magf;
+	float roll;
+	float pitch;
+	float yaw;
+}Control_state;
+
 /* MS56XX气压计时定义的结构体*/
 typedef struct {
   int32_t temp;

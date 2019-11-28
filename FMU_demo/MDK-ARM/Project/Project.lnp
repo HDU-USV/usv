@@ -48,6 +48,10 @@
 "project\ff.o"
 "project\ff_gen_drv.o"
 "project\syscall.o"
+"project\filter.o"
+"project\sensor.o"
+"project\user_library.o"
+"project\mode.o"
 --library_type=microlib --strict --scatter "Project\Project.sct"
 --diag_suppress=L6329 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

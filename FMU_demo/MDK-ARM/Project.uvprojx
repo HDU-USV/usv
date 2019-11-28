@@ -338,7 +338,7 @@
               <MiscControls>--no_strict</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F427xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;          ../Drivers/STM32F4xx_HAL_Driver/Inc;          ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;          ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;          ../Drivers/CMSIS/Include;          ..\Middle_Drivers;          ..\ThirdParty\mavlink;          ..\ThirdParty\mavlink\common;          ..\Middle_Drivers;    ../Middlewares/Third_Party/FatFs/src</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Middle_Drivers;..\ThirdParty\mavlink;..\ThirdParty\mavlink\common;..\Middle_Drivers;../Middlewares/Third_Party/FatFs/src;..\Modules</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -711,6 +711,31 @@
               <FileName>syscall.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Middlewares/Third_Party/FatFs/src/option/syscall.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Modules</GroupName>
+          <Files>
+            <File>
+              <FileName>Filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\Filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_Library.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\User_Library.c</FilePath>
+            </File>
+            <File>
+              <FileName>mode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\mode.c</FilePath>
             </File>
           </Files>
         </Group>

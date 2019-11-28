@@ -136,7 +136,7 @@ int8_t UBX_Receive(void)
 	{
 		read = GPS_RB_Pop();
 		handled |= ParseChar(read);
-		GPS_DEBUG("%x ",read);
+//		GPS_DEBUG("%x ",read);
 	}
 	return handled;
 }

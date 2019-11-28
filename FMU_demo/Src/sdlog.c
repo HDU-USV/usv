@@ -13,6 +13,7 @@
 #include "sdlog.h"
 #include "stdlib.h"
 #include "md_struct.h"
+#include "stdio.h"
 
 FIL log_file;
 FIL index_file;
@@ -189,7 +190,7 @@ void Logger_Enable(void)
 * 输入参数:
 * 返回参数:
 * 功    能: 使logger管理器状态切换到关闭
-* 作    者: by Across工作室
+* 作    者: Across工作室
 * 日    期: 2018/07/21
 *******************************************************************************/
 void Logger_Disable(void)

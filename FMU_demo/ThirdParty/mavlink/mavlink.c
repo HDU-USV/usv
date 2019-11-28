@@ -32,7 +32,7 @@ uint8_t mavlink_byte;
 * 输入参数:
 * 返回参数:
 * 功    能: 初始化一个循环队列，用来管理接收到的串口数据。其实就是一个数据缓冲区
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 void Mavlink_RB_Init(void)
@@ -46,7 +46,7 @@ void Mavlink_RB_Init(void)
 * 输入参数:
 * 返回参数:
 * 功    能: 归零ringbuffer里面的设置。
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 void Mavlink_RB_Clear(void)
@@ -59,7 +59,7 @@ void Mavlink_RB_Clear(void)
 * 输入参数:
 * 返回参数:  溢出为1，反之为0
 * 功    能: 判断缓冲器是否溢出
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 uint8_t  Mavlink_RB_IsOverFlow(void)
@@ -72,7 +72,7 @@ uint8_t  Mavlink_RB_IsOverFlow(void)
 * 输入参数: data：待压入的数据
 * 返回参数:
 * 功    能: 将接收的数据压入缓冲区
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 void Mavlink_RB_Push(uint8_t data)
@@ -85,7 +85,7 @@ void Mavlink_RB_Push(uint8_t data)
 * 输入参数:
 * 返回参数: uint8_t 读出的数据
 * 功    能: 从缓冲器读出数据
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 uint8_t Mavlink_RB_Pop(void)
@@ -98,7 +98,7 @@ uint8_t Mavlink_RB_Pop(void)
 * 输入参数:
 * 返回参数:
 * 功    能: 判断是否有新的数据
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 uint8_t Mavlink_RB_HasNew(void)
@@ -111,7 +111,7 @@ uint8_t Mavlink_RB_HasNew(void)
 * 输入参数:
 * 返回参数:
 * 功    能: 判断有多少个新数据
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 uint16_t Mavlink_RB_Count(void)
@@ -124,7 +124,7 @@ uint16_t Mavlink_RB_Count(void)
 * 输入参数:
 * 返回参数:
 * 功    能: 使能DMA接收
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 void Mavlink_Rece_Enable(void)
@@ -137,7 +137,7 @@ void Mavlink_Rece_Enable(void)
 * 输入参数:
 * 返回参数:
 * 功    能: 初始化MAVLINK：使能接收，ringbuffer关联
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 void Mavlink_Init(void)
@@ -171,7 +171,7 @@ mavlink_system_t mavlink_system =
 * 输入参数:
 * 返回参数:
 * 功    能: 重新定义mavlink的发送函数，与底层硬件接口关联起来
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 void mavlink_send_uart_bytes(mavlink_channel_t chan, const uint8_t *ch, int length)
@@ -184,7 +184,7 @@ void mavlink_send_uart_bytes(mavlink_channel_t chan, const uint8_t *ch, int leng
 * 输入参数:
 * 返回参数:
 * 功    能: 处理从QGC上位机传过来的数据信息
-* 作    者: by Across
+* 作    者: by 
 * 日    期: 2018/06/02
 *******************************************************************************/
 void Mavlink_Msg_Handle(mavlink_message_t msg)
@@ -195,9 +195,13 @@ void Mavlink_Msg_Handle(mavlink_message_t msg)
 		printf("this is heartbeat from QGC\r\n");
 		break;
 	case MAVLINK_MSG_ID_SYS_STATUS:
+		printf("this is sys status from QGC\r\n");
 //		  osd_vbat = (mavlink_msg_sys_status_get_voltage_battery(&msg) / 1000.0f); //Battery voltage, in millivolts (1 = 1 millivolt)
 //			osd_curr = mavlink_msg_sys_status_get_current_battery(&msg); //Battery current, in 10*milliamperes (1 = 10 milliampere)
 //			osd_battery_remaining = mavlink_msg_sys_status_get_battery_remaining(&msg); //Remaining battery energy: (0%: 0, 100%: 100)
+		break;
+	case MAV_CMD_NAV_WAYPOINT:
+		printf("this is nav waypoint command from QGC\r\n");
 		break;
 	default:
 		break;

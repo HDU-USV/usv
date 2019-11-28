@@ -237,3 +237,4 @@ project\main.o: ..\ThirdParty\mavlink\common\./mavlink_msg_trajectory.h
 project\main.o: ..\ThirdParty\mavlink\common\../mavlink_get_info.h
 project\main.o: ../Inc/sdlog.h
 project\main.o: ../Inc/example.h
+project\main.o: ..\Modules\sensor.h

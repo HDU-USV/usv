@@ -42,3 +42,4 @@ project\sdlog.o: ../Inc/main.h
 project\sdlog.o: ../Inc/bsp_driver_sd.h
 project\sdlog.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 project\sdlog.o: ..\Middle_Drivers\md_struct.h
+project\sdlog.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

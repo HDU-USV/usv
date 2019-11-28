@@ -34,6 +34,8 @@
 #include "mavlink.h"
 #include "sdlog.h"
 #include "example.h"
+
+#include "sensor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -120,8 +122,8 @@ int main(void)
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
-//	HAL_Delay(2000);
-//	GPS_Init();
+	HAL_Delay(2000);
+	GPS_Init();
 	MPU6000_Init();
 	Baro_Init();
 	HMC5883_Init();
@@ -130,6 +132,8 @@ int main(void)
 	Com_TwoBoard_Init();
 	Logger_Enable();
 	HAL_Delay(100);
+	
+	Get_Gyro_Offset();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -150,7 +154,7 @@ int main(void)
 //		Baro_Read_Pressure_Test();
 			Loop_Mavlink_Parse();	
 			Example_Exchage_COM();
-//		  Loop_GPS_Parse();				//GPS循环函数
+		  Loop_GPS_Parse();				//GPS循环函数
 
     /* USER CODE END WHILE */
 
