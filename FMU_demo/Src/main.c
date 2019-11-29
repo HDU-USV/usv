@@ -123,7 +123,7 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 	HAL_Delay(2000);
-	GPS_Init();
+//	GPS_Init();
 	MPU6000_Init();
 	Baro_Init();
 	HMC5883_Init();
@@ -154,7 +154,7 @@ int main(void)
 //		Baro_Read_Pressure_Test();
 			Loop_Mavlink_Parse();	
 			Example_Exchage_COM();
-		  Loop_GPS_Parse();				//GPS循环函数
+//		  Loop_GPS_Parse();				//GPS循环函数
 
     /* USER CODE END WHILE */
 

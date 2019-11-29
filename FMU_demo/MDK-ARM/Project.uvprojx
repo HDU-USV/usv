@@ -338,7 +338,7 @@
               <MiscControls>--no_strict</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F427xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Middle_Drivers;..\ThirdParty\mavlink;..\ThirdParty\mavlink\common;..\Middle_Drivers;../Middlewares/Third_Party/FatFs/src;..\Modules</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Middle_Drivers;..\ThirdParty\mavlink;..\ThirdParty\mavlink\common;..\Middle_Drivers;../Middlewares/Third_Party/FatFs/src;..\Modules;..\ThirdParty\ANO</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -687,6 +687,46 @@
               <FileType>5</FileType>
               <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_heartbeat.h</FilePath>
             </File>
+            <File>
+              <FileName>mavlink_msg_command_ack.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_command_ack.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_command_int.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_command_int.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_command_long.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_command_long.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_mission_count.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_mission_count.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_mission_request.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_mission_request.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_mission_request_int.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_mission_request_int.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_mission_request_list.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_mission_request_list.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_mission_ack.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_mission_ack.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -736,6 +776,16 @@
               <FileName>mode.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Modules\mode.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ano_Math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ThirdParty\ANO\Ano_Math.c</FilePath>
+            </File>
+            <File>
+              <FileName>Ano_Pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ThirdParty\ANO\Ano_Pid.c</FilePath>
             </File>
           </Files>
         </Group>

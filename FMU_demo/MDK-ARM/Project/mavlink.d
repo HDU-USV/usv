@@ -215,3 +215,4 @@ project\mavlink.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 project\mavlink.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 project\mavlink.o: ..\Middle_Drivers\md_struct.h
 project\mavlink.o: ..\Middle_Drivers\ringbuffer.h
+project\mavlink.o: ..\Middle_Drivers\md_led_driver.h
