@@ -9,7 +9,7 @@
 #define MAVLINK_PRIMARY_XML_IDX 0
 
 #ifndef MAVLINK_STX
-#define MAVLINK_STX 253
+#define MAVLINK_STX 254
 #endif
 
 #ifndef MAVLINK_ENDIAN
@@ -25,7 +25,7 @@
 #endif
 
 #ifndef MAVLINK_COMMAND_24BIT
-#define MAVLINK_COMMAND_24BIT 1
+#define MAVLINK_COMMAND_24BIT 0
 #endif
 
 #define MAVLINK_USE_CONVENIENCE_FUNCTIONS
@@ -43,4 +43,5 @@ void Loop_Mavlink_Parse(void);
 void Mavlink_Init(void);
 void mavlink_test(void);
 void Mavlink_Rece_Enable(void);
+
 #endif // MAVLINK_H

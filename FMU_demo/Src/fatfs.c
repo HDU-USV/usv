@@ -24,7 +24,13 @@ FATFS SDFatFS;    /* File system object for SD logical drive */
 FIL SDFile;       /* File object for SD */
 
 /* USER CODE BEGIN Variables */
-
+FATFS SDFatFs;  /* File system object for SD card logical drive */
+FIL MyFile;     /* File object */
+uint8_t res;
+static uint8_t buffer[_MAX_SS]; 
+uint32_t byteswritten, bytesread;                     /* File write/read counts */
+uint8_t wtext[] = "This is STM32 working with FatFs"; /* File write buffer */
+uint8_t rtext[100];   
 /* USER CODE END Variables */    
 
 void MX_FATFS_Init(void) 
@@ -33,6 +39,16 @@ void MX_FATFS_Init(void)
   retSD = FATFS_LinkDriver(&SD_Driver, SDPath);
 
   /* USER CODE BEGIN Init */
+		 if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+    {
+      /* FatFs Initialization Error */
+      //printf("f_mount error\r\n");
+    }
+			if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, buffer, sizeof(buffer)) != FR_OK)
+    {
+        /* FatFs Format Error */
+		  //printf("f_mkfs error\r\n");
+    }
   /* additional user code for init */     
   /* USER CODE END Init */
 }

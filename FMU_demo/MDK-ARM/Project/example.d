@@ -44,3 +44,6 @@ project\example.o: ..\Middle_Drivers\md_hmc5883.h
 project\example.o: ..\Middle_Drivers\md_gps.h
 project\example.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 project\example.o: ..\Middle_Drivers\md_twoboardcom.h
+project\example.o: ..\Modules\control.h
+project\example.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+project\example.o: ..\Middle_Drivers\md_ubx.h

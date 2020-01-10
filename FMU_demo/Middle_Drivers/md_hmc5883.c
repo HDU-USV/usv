@@ -428,7 +428,7 @@ void HMC5883_Read_Data(hmc5883MagData * _magData)
 	_magData->x /= _hmc5883_Gauss_LSB_XYZ;
 	_magData->y /= _hmc5883_Gauss_LSB_XYZ;
 	_magData->z /= _hmc5883_Gauss_LSB_XYZ;
-//	printf("%lf ,%lf£¬%lf \r\n",_magData->x ,_magData->y,_magData->z);
+	printf("%lf ,%lf£¬%lf \r\n",_magData->x ,_magData->y,_magData->z);
 }
 
 /*******************************º¯ÊýÉùÃ÷****************************************

@@ -336,9 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--no_strict</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F427xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F427xx,RT_USING_ARM_LIBC,ARM_MATH_CM4,__TARGET_FPU_VFP,ARM_MATH_MATRIX_CHECK,ARM_MATH_ROUNDING</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Middle_Drivers;..\ThirdParty\mavlink;..\ThirdParty\mavlink\common;..\Middle_Drivers;../Middlewares/Third_Party/FatFs/src;..\Modules;..\ThirdParty\ANO</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Middle_Drivers;..\ThirdParty\mavlink;..\ThirdParty\mavlink\common;..\Middle_Drivers;../Middlewares/Third_Party/FatFs/src;..\Modules;..\ThirdParty\ANO;..\ThirdParty\JY901;..\Drivers\CMSIS\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -386,6 +386,11 @@
               <FileName>sdlog.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\sdlog.c</FilePath>
+            </File>
+            <File>
+              <FileName>example.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\example.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
@@ -452,11 +457,6 @@
               <FileType>1</FileType>
               <FilePath>../Src/stm32f4xx_hal_msp.c</FilePath>
             </File>
-            <File>
-              <FileName>example.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\example.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -511,6 +511,16 @@
               <FileName>md_twoboardcom.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middle_Drivers\md_twoboardcom.c</FilePath>
+            </File>
+            <File>
+              <FileName>JY901.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ThirdParty\JY901\JY901.c</FilePath>
+            </File>
+            <File>
+              <FileName>md_struct.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middle_Drivers\md_struct.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -727,6 +737,16 @@
               <FileType>5</FileType>
               <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_mission_ack.h</FilePath>
             </File>
+            <File>
+              <FileName>mavlink_msg_attitude.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_attitude.h</FilePath>
+            </File>
+            <File>
+              <FileName>mavlink_msg_attitude_quaternion.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\ThirdParty\mavlink\common\mavlink_msg_attitude_quaternion.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -786,6 +806,21 @@
               <FileName>Ano_Pid.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\ThirdParty\ANO\Ano_Pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>attitude.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\attitude.c</FilePath>
+            </File>
+            <File>
+              <FileName>control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Modules\control.c</FilePath>
+            </File>
+            <File>
+              <FileName>arm_cortexM4lf_math.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\Drivers\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib</FilePath>
             </File>
           </Files>
         </Group>

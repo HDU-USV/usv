@@ -34,8 +34,8 @@ project\md_twoboardcom.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.
 project\md_twoboardcom.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 project\md_twoboardcom.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 project\md_twoboardcom.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+project\md_twoboardcom.o: ..\Middle_Drivers\md_struct.h
 project\md_twoboardcom.o: ..\Middle_Drivers\ringbuffer.h
 project\md_twoboardcom.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 project\md_twoboardcom.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 project\md_twoboardcom.o: ..\ThirdParty\mavlink\checksum.h
-project\md_twoboardcom.o: ..\Middle_Drivers\md_struct.h

@@ -12,8 +12,9 @@
 *******************************************************************************/
 #include "sdlog.h"
 #include "stdlib.h"
-#include "md_struct.h"
 #include "stdio.h"
+#include "md_struct.h"
+
 
 FIL log_file;
 FIL index_file;
@@ -21,7 +22,7 @@ FIL index_file;
 extern MPU6000_Data 		m_Mpu6000;
 extern hmc5883MagData 	m_Hmc5883;
 extern MS56XX_Data 	    m_Ms56xx;
-extern RC_Channel       m_RC_input_from_F1;
+
 
 UINT log_num;
 char log_buffer[512];

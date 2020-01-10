@@ -573,7 +573,8 @@ extern "C" {
 	} ubx_ack_state_t;
 
 	typedef uint64_t gps_abstime;
-
+  extern struct vehicle_gps_position_s *_gps_position;
+	
   int configure(uint32_t *baudrate, OutputMode output_mode,uint64_t timeout);
 	void uart_test(void);
 	int8_t UBX_Receive(void);

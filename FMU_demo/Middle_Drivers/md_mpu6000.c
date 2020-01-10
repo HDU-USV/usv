@@ -188,7 +188,7 @@ void MPU6000_Test(void)
 {
    MPU6000_Data data;
 	 MPU6000_Get_Data(&data);
-	 printf("%d,%d,%d,%d,%d,%d\r\n",data.acc_raw.x,data.acc_raw.y,data.acc_raw.z,data.gyro_raw.x,data.gyro_raw.y,data.gyro_raw.z);
+//	 printf("%d,%d,%d,%d,%d,%d\r\n",data.acc_raw.x,data.acc_raw.y,data.acc_raw.z,data.gyro_raw.x,data.gyro_raw.y,data.gyro_raw.z);
 	 HAL_Delay(20);
 }
 

@@ -14,7 +14,7 @@
 #define __MD_TWOBOARDCOM_H
 
 #include "stm32f4xx_hal.h"
-
+#include "md_struct.h"
 enum Com_States {searchingHead1,searchingHead2,record_VaildLenght,record_VaildDatas,decode_Page};
 
 //ringbuffer»º³åÆ÷µÄ³¤¶È
@@ -57,7 +57,7 @@ void Com_TwoBoard_RB_Update(void);
 void Com_TwoBoard_RB_Push(uint8_t data);
 
 void Com_TwoBoard_Msg_HeartBeat(uint8_t safeSwitch);
-void Com_TwoBoard_Msg_MotorValue_Send(uint16_t *motor_value);
+void Com_TwoBoard_Msg_MotorValue_Send(Motor_Value *motor_value);
 
 void Com_TwoBoard_Init(void);
 #endif

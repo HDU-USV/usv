@@ -16,5 +16,11 @@
 #include "stm32f4xx_hal.h"
 #include "main.h"
 
+typedef enum {
+	RUN = 0,
+	LIMIT,
+	STOP
+} decode_move;
+
 void Example_Exchage_COM(void);
 #endif

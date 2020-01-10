@@ -34,8 +34,9 @@
 #include "mavlink.h"
 #include "sdlog.h"
 #include "example.h"
-
+#include "JY901.h"
 #include "sensor.h"
+#include "control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -57,6 +58,9 @@
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 __IO ITStatus Timer6UpdateReady = RESET;
+__IO uint32_t Timer6_50HzCount = 0;
+__IO ITStatus Timer6_50HzUpdateReady = RESET;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -118,22 +122,24 @@ int main(void)
   MX_USART6_UART_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
+  MX_USART3_UART_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 	HAL_Delay(2000);
-//	GPS_Init();
-	MPU6000_Init();
-	Baro_Init();
+	GPS_Init();
+//	MPU6000_Init();
+//	Baro_Init();
 	HMC5883_Init();
 	Mavlink_Init();
 	HAL_TIM_Base_Start_IT(&htim6);
-	Com_TwoBoard_Init();
-	Logger_Enable();
+	Com_TwoBoard_Init(); 
+	JY901_Init();
+	turn_pid_init();
 	HAL_Delay(100);
 	
-	Get_Gyro_Offset();
+//	Get_Gyro_Offset();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -145,16 +151,15 @@ int main(void)
 		{
 			Timer6UpdateReady=RESET;
 			Loop_Led_Flick();
-			Loop_Read_MPU6000();	//6轴姿态传感器循环函数
-			Loop_Read_Bar();			//气压传感器循环函数
-			Loop_Read_Mag(); 			//地磁传感器循环函数
 			mavlink_test();
-
+			JY901_Receive();
+			Loop_Read_Mag();
+			heading_control();
 		}
-//		Baro_Read_Pressure_Test();
+	 
 			Loop_Mavlink_Parse();	
 			Example_Exchage_COM();
-//		  Loop_GPS_Parse();				//GPS循环函数
+		  Loop_GPS_Parse();				//GPS循环函数
 
     /* USER CODE END WHILE */
 
@@ -212,15 +217,54 @@ void SystemClock_Config(void)
   */
 static void MX_NVIC_Init(void)
 {
+  /* DMA1_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
   /* DMA1_Stream2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Stream2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Stream2_IRQn);
+  /* DMA1_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
+  /* DMA1_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
+  /* USART3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART3_IRQn, 1, 1);
+  HAL_NVIC_EnableIRQ(USART3_IRQn);
+  /* SDIO_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(SDIO_IRQn, 2, 3);
+  HAL_NVIC_EnableIRQ(SDIO_IRQn);
   /* UART4_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(UART4_IRQn, 2, 3);
   HAL_NVIC_EnableIRQ(UART4_IRQn);
   /* TIM6_DAC_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 2, 1);
   HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+  /* DMA2_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn);
+  /* DMA2_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
+  /* DMA2_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 2, 1);
+  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
+  /* DMA2_Stream7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream7_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
+  /* USART6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USART6_IRQn);
+  /* FPU_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(FPU_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(FPU_IRQn);
+  /* UART7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(UART7_IRQn, 3, 3);
+  HAL_NVIC_EnableIRQ(UART7_IRQn);
+  /* UART8_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(UART8_IRQn, 1, 2);
+  HAL_NVIC_EnableIRQ(UART8_IRQn);
 }
 
 /* USER CODE BEGIN 4 */
@@ -245,6 +289,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim->Instance ==TIM6)
 	{
 		Timer6UpdateReady=SET;
+		Timer6_50HzCount++;
+		if(Timer6_50HzCount %10 == 0)
+		{
+		  Timer6_50HzUpdateReady = SET;
+		}
 	}
 
 }
@@ -281,7 +330,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 		GPS_RX_InterruptHandler();
 	}
 	
-		if(UartHandle->Instance == UART8)
+	if(UartHandle->Instance == UART8)
 	{
 		Mavlin_RX_InterruptHandler();
 	}
@@ -290,6 +339,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	{
 		Com_TwoBoard_RX_InterruptHandler();
 	}
+	
+	if(UartHandle->Instance == USART3)
+	{
+		JY901_InterruptHandler();
+	}
+	
+
 	
 }
 /* USER CODE END 4 */

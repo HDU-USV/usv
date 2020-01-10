@@ -15,6 +15,7 @@
 #include <string.h>
 #include "checksum.h"
 #include "md_struct.h"
+
 /*
 数据包格式
 uint8_t head1;      //数据头1 ：0XAA；
@@ -280,7 +281,7 @@ void extra_safety_switch_value(uint8_t *buf)
 * 作    者: by 
 * 日    期: 2017/12/18
 *******************************************************************************/
-RC_Channel m_RC_input_from_F1;
+
 __IO ITStatus f_NewRCDataReady = RESET;
 void extra_rc_input_value(uint8_t *buf)
 {
@@ -486,7 +487,7 @@ void Com_TwoBoard_Msg_HeartBeat_Send(uint8_t safeSwitch)
 * 作    者: by 
 * 日    期: 2017/12/18
 *******************************************************************************/
-void Com_TwoBoard_Msg_MotorValue_Send(uint16_t *motor_value)
+void Com_TwoBoard_Msg_MotorValue_Send(Motor_Value *motor_value)
 {
 	/*将数据放入待发送数据区*/
 	uint16_t checksum;
@@ -501,12 +502,12 @@ void Com_TwoBoard_Msg_MotorValue_Send(uint16_t *motor_value)
 	//信息包种类
 	_twoboard_put_uint8_t(buf_Motor,3,PWM_TYPE);
 	//信息包数据
-	_twoboard_put_uint16_t(buf_Motor,4,motor_value[0]);
-	_twoboard_put_uint16_t(buf_Motor,6,motor_value[1]);
-	_twoboard_put_uint16_t(buf_Motor,8,motor_value[2]);
-	_twoboard_put_uint16_t(buf_Motor,10,motor_value[3]);
-	_twoboard_put_uint16_t(buf_Motor,12,motor_value[4]);
-	_twoboard_put_uint16_t(buf_Motor,14,motor_value[5]);
+	_twoboard_put_uint16_t(buf_Motor,4,motor_value->motor1);
+	_twoboard_put_uint16_t(buf_Motor,6,motor_value->motor2);
+	_twoboard_put_uint16_t(buf_Motor,8,motor_value->motor3);
+	_twoboard_put_uint16_t(buf_Motor,10,motor_value->motor4);
+	_twoboard_put_uint16_t(buf_Motor,12,motor_value->motor5);
+	_twoboard_put_uint16_t(buf_Motor,14,motor_value->motor6);
 
 	//计算CRC校验
 	checksum = crc_calculate(&buf_Motor[2],RCINPUT_VALID_DATA_LENGTH+BYTES_OF_LENGTH);

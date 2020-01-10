@@ -21,7 +21,7 @@ extern "C" {
 #include "stdio.h"
 	
 #define GPS_READ_BUFFER_SIZE 128
-#define DEBUG_GPS_ENABLE
+//#define DEBUG_GPS_ENABLE
 	
 /*重新定GPS_DEBUG函数*/
 #ifdef DEBUG_GPS_ENABLE

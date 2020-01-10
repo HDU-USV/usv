@@ -1,8 +1,10 @@
-#pragma once
+#ifndef  _MAVLINK_PROTOCOL_H_
+#define  _MAVLINK_PROTOCOL_H_
 
 #include "string.h"
 #include "mavlink_types.h"
-/*
+
+/* 
    If you want MAVLink on a system that is native big-endian,
    you need to define NATIVE_BIG_ENDIAN
 */
@@ -32,14 +34,6 @@
 #define MAVLINK_END_UART_SEND(chan, length)
 #endif
 
-#ifndef MAVLINK_START_SIGN_STREAM
-#define MAVLINK_START_SIGN_STREAM(chan)
-#endif
-
-#ifndef MAVLINK_END_SIGN_STREAM
-#define MAVLINK_END_SIGN_STREAM(chan)
-#endif
-
 /* option to provide alternative implementation of mavlink_helpers.h */
 #ifdef MAVLINK_SEPARATE_HELPERS
 
@@ -50,28 +44,36 @@
     MAVLINK_HELPER mavlink_status_t* mavlink_get_channel_status(uint8_t chan);
     #endif
     MAVLINK_HELPER void mavlink_reset_channel_status(uint8_t chan);
+    #if MAVLINK_CRC_EXTRA
     MAVLINK_HELPER uint16_t mavlink_finalize_message_chan(mavlink_message_t* msg, uint8_t system_id, uint8_t component_id,
                                                           uint8_t chan, uint8_t min_length, uint8_t length, uint8_t crc_extra);
     MAVLINK_HELPER uint16_t mavlink_finalize_message(mavlink_message_t* msg, uint8_t system_id, uint8_t component_id,
                                                      uint8_t min_length, uint8_t length, uint8_t crc_extra);
     #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
-		#warning "protocol MAVLINK_USE_CONVENIENCE_FUNCTIONS"
-    MAVLINK_HELPER void _mav_finalize_message_chan_send(mavlink_channel_t chan, uint32_t msgid, const char *packet,
+    MAVLINK_HELPER void _mav_finalize_message_chan_send(mavlink_channel_t chan, uint8_t msgid, const char *packet,
                                                         uint8_t min_length, uint8_t length, uint8_t crc_extra);
     #endif
+    #else
+    MAVLINK_HELPER uint16_t mavlink_finalize_message_chan(mavlink_message_t* msg, uint8_t system_id, uint8_t component_id,
+                                                          uint8_t chan, uint8_t length);
+    MAVLINK_HELPER uint16_t mavlink_finalize_message(mavlink_message_t* msg, uint8_t system_id, uint8_t component_id,
+                                                     uint8_t length);
+    #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
+    MAVLINK_HELPER void _mav_finalize_message_chan_send(mavlink_channel_t chan, uint8_t msgid, const char *packet, uint8_t length);
+    #endif
+    #endif // MAVLINK_CRC_EXTRA
     MAVLINK_HELPER uint16_t mavlink_msg_to_send_buffer(uint8_t *buffer, const mavlink_message_t *msg);
     MAVLINK_HELPER void mavlink_start_checksum(mavlink_message_t* msg);
     MAVLINK_HELPER void mavlink_update_checksum(mavlink_message_t* msg, uint8_t c);
-    MAVLINK_HELPER uint8_t mavlink_frame_char_buffer(mavlink_message_t* rxmsg,
+    MAVLINK_HELPER uint8_t mavlink_frame_char_buffer(mavlink_message_t* rxmsg, 
 						     mavlink_status_t* status,
-						     uint8_t c,
-						     mavlink_message_t* r_message,
+						     uint8_t c, 
+						     mavlink_message_t* r_message, 
 						     mavlink_status_t* r_mavlink_status);
     MAVLINK_HELPER uint8_t mavlink_frame_char(uint8_t chan, uint8_t c, mavlink_message_t* r_message, mavlink_status_t* r_mavlink_status);
     MAVLINK_HELPER uint8_t mavlink_parse_char(uint8_t chan, uint8_t c, mavlink_message_t* r_message, mavlink_status_t* r_mavlink_status);
     MAVLINK_HELPER uint8_t put_bitfield_n_by_index(int32_t b, uint8_t bits, uint8_t packet_index, uint8_t bit_index,
                                uint8_t* r_bit_index, uint8_t* buffer);
-    MAVLINK_HELPER const mavlink_msg_entry_t *mavlink_get_msg_entry(uint32_t msgid);
     #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
     MAVLINK_HELPER void _mavlink_send_uart(mavlink_channel_t chan, const char *buf, uint16_t len);
     MAVLINK_HELPER void _mavlink_resend_uart(mavlink_channel_t chan, const mavlink_message_t *msg);
@@ -84,17 +86,12 @@
 
 #endif // MAVLINK_SEPARATE_HELPERS
 
-
 /**
  * @brief Get the required buffer size for this message
  */
 static inline uint16_t mavlink_msg_get_send_buffer_length(const mavlink_message_t* msg)
 {
-	if (msg->magic == MAVLINK_STX_MAVLINK1) {
-		return msg->len + MAVLINK_CORE_HEADER_MAVLINK1_LEN+1 + 2;
-	}
-    	uint16_t signature_len = (msg->incompat_flags & MAVLINK_IFLAG_SIGNED)?MAVLINK_SIGNATURE_BLOCK_LEN:0;
-	return msg->len + MAVLINK_NUM_NON_PAYLOAD_BYTES + signature_len;
+	return msg->len + MAVLINK_NUM_NON_PAYLOAD_BYTES;
 }
 
 #if MAVLINK_NEED_BYTE_SWAP
@@ -288,21 +285,21 @@ _MAV_MSG_RETURN_TYPE(float)
 _MAV_MSG_RETURN_TYPE(double)
 #endif // MAVLINK_NEED_BYTE_SWAP
 
-static inline uint16_t _MAV_RETURN_char_array(const mavlink_message_t *msg, char *value,
+static inline uint16_t _MAV_RETURN_char_array(const mavlink_message_t *msg, char *value, 
 						     uint8_t array_length, uint8_t wire_offset)
 {
 	memcpy(value, &_MAV_PAYLOAD(msg)[wire_offset], array_length);
 	return array_length;
 }
 
-static inline uint16_t _MAV_RETURN_uint8_t_array(const mavlink_message_t *msg, uint8_t *value,
+static inline uint16_t _MAV_RETURN_uint8_t_array(const mavlink_message_t *msg, uint8_t *value, 
 							uint8_t array_length, uint8_t wire_offset)
 {
 	memcpy(value, &_MAV_PAYLOAD(msg)[wire_offset], array_length);
 	return array_length;
 }
 
-static inline uint16_t _MAV_RETURN_int8_t_array(const mavlink_message_t *msg, int8_t *value,
+static inline uint16_t _MAV_RETURN_int8_t_array(const mavlink_message_t *msg, int8_t *value, 
 						       uint8_t array_length, uint8_t wire_offset)
 {
 	memcpy(value, &_MAV_PAYLOAD(msg)[wire_offset], array_length);
@@ -338,3 +335,5 @@ _MAV_RETURN_ARRAY(int32_t,  i32)
 _MAV_RETURN_ARRAY(int64_t,  i64)
 _MAV_RETURN_ARRAY(float,    f)
 _MAV_RETURN_ARRAY(double,   d)
+
+#endif // _MAVLINK_PROTOCOL_H_

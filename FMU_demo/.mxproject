@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/admin/Desktop/USV_demo/FMU_demo/Inc
+HeaderPath=C:/Users/admin/Desktop/USV_demo_uart/FMU_demo/Inc
 HeaderFiles=gpio.h;stm32f4xx_it.h;stm32f4xx_hal_conf.h;main.h;sys.h;usart.h;spi.h;tim.h;dma.h;ffconf.h;bsp_driver_sd.h;sd_diskio.h;fatfs.h;sdio.h;
-SourcePath=C:/Users/admin/Desktop/USV_demo/FMU_demo/Src
+SourcePath=C:/Users/admin/Desktop/USV_demo_uart/FMU_demo/Src
 SourceFiles=gpio.h;stm32f4xx_it.h;stm32f4xx_hal_conf.h;main.h;gpio.c;stm32f4xx_it.c;stm32f4xx_hal_msp.c;main.c;sys.c;usart.c;spi.c;tim.c;dma.c;bsp_driver_sd.c;sd_diskio.c;fatfs.c;sdio.c;
 
 [PreviousLibFiles]
